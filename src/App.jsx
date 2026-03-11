@@ -3,6 +3,16 @@ import './App.css'
 import { questions, personalityTypes } from './data/questions'
 import { exportToPdf } from './utils/pdfExport'
 
+const makePdf = caseNumber => () =>
+  exportToPdf({
+    selector: '.app',
+    filename: `psychological-profile-${caseNumber}.pdf`,
+    width: 700,
+    margin: { x: 10, y: 0 },
+    ignore: '.reset-btn',
+    backgroundColor: '#0a0a0a',
+  })
+
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState({})
@@ -111,7 +121,7 @@ function App() {
             <p>{profile.secondaryData.description}</p>
           </div>
 
-          <button className="reset-btn" onClick={() => exportToPdf('.results-container', `psychological-profile-${caseNumber}.pdf`)}>
+          <button className="reset-btn" onClick={makePdf(caseNumber)}>
             EXPORT PDF
           </button>
 
