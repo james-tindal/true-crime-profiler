@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { questions, personalityTypes } from './data/questions'
+import htmlToPdf from 'html-to-pdf-js'
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -9,6 +10,18 @@ function App() {
   const [profile, setProfile] = useState(null)
 
   const caseNumber = Math.floor(8427)
+
+  const exportToPdf = async () => {
+    const element = document.getElementById('results-content')
+    const opt = {
+      margin: 10,
+      filename: `psychological-profile-${caseNumber}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, backgroundColor: '#0a0a0a', ignoreElements: el => el.matches('.reset-btn') },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }
+    await htmlToPdf().set(opt).from(element).save()
+  }
 
   const calculateProfile = () => {
     const scores = {}
@@ -45,12 +58,10 @@ function App() {
     setAnswers(newAnswers)
 
     if (currentQuestion < questions.length - 1) {
-      setTimeout(() => setCurrentQuestion(currentQuestion + 1), 300)
+      setCurrentQuestion(currentQuestion + 1)
     } else {
-      setTimeout(() => {
-        setProfile(calculateProfile())
-        setShowResults(true)
-      }, 500)
+      setProfile(calculateProfile())
+      setShowResults(true)
     }
   }
 
@@ -68,7 +79,7 @@ function App() {
   if (showResults && profile) {
     return (
       <div className="app">
-        <div className="results-container">
+        <div className="results-container" id="results-content">
           <div className="results-header">
             <div className="case-file">CASE FILE #2024-{caseNumber}</div>
             <h1>PSYCHOLOGICAL PROFILE</h1>
@@ -111,6 +122,10 @@ function App() {
             <h3>Secondary Profile: {profile.secondaryData.name}</h3>
             <p>{profile.secondaryData.description}</p>
           </div>
+
+          <button className="reset-btn" onClick={exportToPdf}>
+            EXPORT PDF
+          </button>
 
           <button className="reset-btn" onClick={resetProfiler}>
             NEW PROFILE

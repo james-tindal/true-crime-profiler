@@ -11,6 +11,7 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
+    "html-to-pdf-js": "^0.9.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

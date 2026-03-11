@@ -37,7 +37,7 @@ body {
   min-height: 100vh;
   background: 
     radial-gradient(ellipse at top, #1a1a1a 0%, transparent 50%),
-    radial-gradient(ellipse at bottom, #0d0d0d 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, #161616 0%, transparent 50%),
     var(--bg-dark);
   padding: 2rem 1rem;
 }
@@ -68,7 +68,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+  text-shadow: 0 0 10px rgba(196, 30, 58, 0.8);
 }
 
 .subtitle {
@@ -410,6 +410,7 @@ body {
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
+  margin-bottom: 10px;
   padding: 1rem 2rem;
   background: transparent;
   border: 2px solid var(--accent-red);
