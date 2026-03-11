@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { questions, personalityTypes } from './data/questions'
-import htmlToPdf from 'html-to-pdf-js'
+import { exportToPdf } from './utils/pdfExport'
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -10,18 +10,6 @@ function App() {
   const [profile, setProfile] = useState(null)
 
   const caseNumber = Math.floor(8427)
-
-  const exportToPdf = async () => {
-    const element = document.getElementById('results-content')
-    const opt = {
-      margin: 10,
-      filename: `psychological-profile-${caseNumber}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, backgroundColor: '#0a0a0a', ignoreElements: el => el.matches('.reset-btn') },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    }
-    await htmlToPdf().set(opt).from(element).save()
-  }
 
   const calculateProfile = () => {
     const scores = {}
@@ -123,7 +111,7 @@ function App() {
             <p>{profile.secondaryData.description}</p>
           </div>
 
-          <button className="reset-btn" onClick={exportToPdf}>
+          <button className="reset-btn" onClick={() => exportToPdf('.results-container', `psychological-profile-${caseNumber}.pdf`)}>
             EXPORT PDF
           </button>
 
