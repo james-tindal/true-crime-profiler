@@ -27,7 +27,7 @@ export const exportToPdf = async ({ selector, filename, width, margin, ignore, b
   const imgData = canvas.toDataURL('image/jpeg', 1)
   const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' })
   pdf.setFillColor(backgroundColor)
-  pdf.rect(0, 0, 210, 297, 'F')
+  pdf.rect(-0.5, -0.5, 211, 298, 'F')
 
   const imgWidth = 190
   const imgHeight = (canvas.height * imgWidth) / canvas.width
