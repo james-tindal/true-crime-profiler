@@ -224,7 +224,7 @@ body {
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 4px;
-  text-shadow: 0 0 30px rgba(196, 30, 58, 0.4);
+  text-shadow: 0 0 10px rgba(196, 30, 58, 0.8);
 }
 
 .match-indicator {
